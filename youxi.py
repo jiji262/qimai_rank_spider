@@ -6,8 +6,9 @@ import pandas as pd
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 
 class youxi():
-    def __init__(self, headers):
+    def __init__(self, headers, date):
         self.headers = headers
+        self.date = date
 
     # 用execjs运行七麦数据js文件，破解analysis参数
     def analysis_parser(self,data, url):
@@ -55,8 +56,7 @@ class youxi():
             keywordCoverTop3 = one['keywordCoverTop3']
             appId = one['appInfo']['appId']  # app_id
             appName = one['appInfo']['appName']  # app名称
-            compId = one['company']['id']  # app_id
-            compName = one['company']['name']  # app名称
+            publisher = one['appInfo']['publisher'] 
             comment_rating = one['comment']['rating']  # 分数
             comment_num = one['comment']['num']  # 评分数量
             rank_a = one['rank_a']['ranking']  
@@ -73,7 +73,7 @@ class youxi():
             data_dict['#'].append(index)
             data_dict['应用'].append(appName)
             data_dict['appId'].append(appId)
-            data_dict['company'].append(compName)
+            data_dict['publisher'].append(publisher)
             data_dict['总榜排名'].append(rank_a)
             data_dict['应用/游戏'].append(rank_b_genre)
             data_dict['应用/游戏排名'].append(rank_b)
@@ -84,11 +84,12 @@ class youxi():
             data_dict['分数'].append(comment_rating)
             data_dict['评分数'].append(comment_num)
             data_dict['最新版本'].append(pd.to_datetime(lastReleaseTime))
+            data_dict['抓取日期'].append(pd.to_datetime(date))
 
     def shuchu(self,date):
 
         data_dict1 = {
-            '#': [], '应用': [], 'appId': [], 'company': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [],
+            '#': [], '应用': [], 'appId': [], 'publisher': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [], '抓取日期': [],
         }
         # 未登录只能看前4页200条数据
         for page in range(1, 31):
@@ -113,7 +114,7 @@ class youxi():
             df1.to_excel(writer, sheet_name='免费', index=False, encoding='utf-8')
 
         data_dict2 = {
-            '#': [], '应用': [], 'appId': [], 'company': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [],
+            '#': [], '应用': [], 'appId': [], 'publisher': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [], '抓取日期': [],
         }
         # 未登录只能看前4页200条数据
         for page in range(1, 31):
@@ -135,7 +136,7 @@ class youxi():
 
 
         data_dict3 = {
-            '#': [], '应用': [], 'appId': [], 'company': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [],
+            '#': [], '应用': [], 'appId': [], 'publisher': [], '总榜排名': [], '应用/游戏': [], '应用/游戏排名': [], '分类': [], '分类排名': [], '关键词覆盖数': [], 'TOP3': [], '分数': [], '评分数': [], '最新版本': [], '抓取日期': [],
         }
         # 未登录只能看前4页200条数据
         for page in range(1, 31):

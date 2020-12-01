@@ -12,8 +12,8 @@ if __name__ == '__main__':
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
     }
 
-   zongbang=zongbang(headers)
+   zongbang=zongbang(headers, date)
    zongbang.shuchu(date)
 
-   youxi=youxi(headers)
+   youxi=youxi(headers, date)
    youxi.shuchu(date)
